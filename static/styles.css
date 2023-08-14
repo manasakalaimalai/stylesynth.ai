@@ -99,8 +99,12 @@
     box-sizing: border-box; 
 }
 
-#search-icon {
-    font-family: "Poppins";
+#search-button {
+    border: none;
+    background: url('../static/images/search.png') no-repeat center center;
+    background-size: contain;
+    width: 30px; /* Adjust the width of the button */
+    height: 30px; /* Adjust the height of the button */
     cursor: pointer;
     margin-left: 10px;
 }

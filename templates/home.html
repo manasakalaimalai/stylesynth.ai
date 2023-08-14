@@ -18,27 +18,27 @@
             <ul class="nav-list">
                 <li><a href="#">Marketplace</a></li>
                 <li><a href="#">Orders</a></li>
-                <li><a href="#">Outfit Tool</a></li>
+                <li><a href="../templates/outfit.html">Outfit Tool</a></li>
             </ul>
         </nav>
     </header>
     <form action="/submit" method="POST">
         <div class="search-container">
             <input type="text" id="search" name="search" placeholder="Search..." onclick="toggleDropdown()">
-            <img src="../static/images/search.png" alt="Search" id="search-icon" onclick="performSearch()" width="20px">
+            <input type="submit" value="" id="search-button">
         </div>
-        <div class="dropdown" id="dropdown">
+        <div class="dropdown" id="dropdown" style="display: none;">
             <label for="option1"> For who </label>
-            <select id="option1" name="option1">
+            <select id="option1" name="option1" onchange="populateSearchBar('option1')">
                 <option value="Men"> Men </option>
                 <option value="Women"> Women </option>
                 <option value="Kids"> Kids </option>
                 <option value="Unisex"> Unisex </option>
             </select>
             <br><br>
-
+            
             <label for="option2"> Looking for </label>
-            <select id="option2" name="option2">
+            <select id="option2" name="option2"onchange="populateSearchBar('option2')">    
                 <option value="T-Shirt"> T-Shirt </option>
                 <option value="Shirt"> Shirt </option>
                 <option value="Jeans"> Jeans </option>
@@ -61,7 +61,7 @@
             <br><br>
 
             <label for="option3"> Brand </label>
-            <select id="option3" name="option3">
+            <select id="option3" name="option3" onchange="populateSearchBar('option3')">
                 <option value="Any"> Any </option>
                 <option value="Nike"> Nike </option>
                 <option value="Adidas"> Adidas </option>
@@ -83,7 +83,7 @@
             <br><br>
 
             <label for="option4"> Fabric </label>
-            <select id="option4" name="option4">
+            <select id="option4" name="option4" onchange="populateSearchBar('option4')">
                 <option value="Any"> Any </option>
                 <option value="Cotton"> Cotton </option>
                 <option value="Wool"> Wool </option>
@@ -101,7 +101,7 @@
             <br><br>
 
             <label for="option5"> Color </label>
-            <select id="option5" name="option5">
+            <select id="option5" name="option5" onchange="populateSearchBar('option5')">
                 <option value="Any"> Any </option>
                 <option value="Colorful"> Colorful </option>
                 <option value="Black"> Black </option>
@@ -116,10 +116,11 @@
                 <option value="Violet"> Violet </option>
             </select>
             <br><br>
-
-
-
         </div>
     </form>
+    <div id="selected-options" class="tag-container"></div>
+
 </body>
 </html>
+
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outfit Generator</title>
+<link rel="stylesheet" type="text/css" href="../static/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="../static/script.js"></script>
+<style>
+  body {
+    font-family: "Poppins";
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+  }
+  .chatbox {
+    width: 20%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center the content horizontally */
+  }
+  input[type="text"] {
+    font-family: "Poppins";
+    width: 60%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #33747c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 5%;
+  }
+</style>
+</head>
+<body>
+<div class="chatbox">
+  <h2>Almost There!</h2>
+  <p style="font-size:small;">Answer a few more questions so we can create the perfect outfit for you.</p>
+  <div id="chat"></div>
+  <div id="inputSection"></div>
+  <div id="output"></div>
+</div>
+<script>
+  const questions = [
+    "What is your body type?",
+    "What is your age?",
+    "For what occasion are you looking for an outfit?",
+    "Which region are you living in?"
+  ];
+  let currentQuestion = 0;
+
+  const chatElement = document.getElementById("chat");
+  const inputSection = document.getElementById("inputSection");
+  const outputElement = document.getElementById("output");
+
+  function askQuestion() {
+    if (currentQuestion < questions.length) {
+      chatElement.innerHTML = `<p><strong>Bot:</strong> ${questions[currentQuestion]}</p>`;
+      inputSection.innerHTML = `<input type="text" id="answer${currentQuestion}" placeholder="Your answer...">`;
+      inputSection.innerHTML += `<button onclick="nextQuestion()">Next</button>`;
+    } else {
+        inputSection.innerHTML = `<p>Loading...</p>`;
+        setTimeout(showOutput, 200); // Simulate loading time and call showOutput after 2 seconds
+    }
+  }
+
+  function nextQuestion() {
+    const answer = document.getElementById(`answer${currentQuestion}`).value;
+    // Do something with the user's answer if needed
+    currentQuestion++;
+    askQuestion();
+  }
+
+  function showOutput() {
+    let outputText = "User's Answers:\n";
+    for (let i = 0; i < questions.length; i++) {
+      const answer = document.getElementById(`answer${i}`).value;
+      outputText += `${questions[i]}\n${answer}\n\n`;
+    }
+    outputElement.innerHTML = `<pre>${outputText}</pre>`;
+  }
+
+  askQuestion();
+</script>
+</body>
+</html>
