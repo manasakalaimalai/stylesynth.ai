@@ -1,0 +1,107 @@
+/* New CSS styles for header and nav bar */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: #f2f2f2; */
+    padding: 10px;
+}
+
+.logo {
+    width: 300px;
+}
+
+.nav-list {
+    font-family: "Poppins";
+    font-weight: 600;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-list li {
+    margin-left: 20px;
+    margin-right: 50px;
+}
+
+.nav-list li:first-child {
+    margin-left: 10;
+}
+
+.nav-list a {
+    color: rgb(46, 110, 126);
+    text-decoration: none;
+}
+
+
+/* dropdown search bar */
+.dropdown {
+    font-family: "Poppins";
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid rgb(63, 123, 131);
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    box-shadow: 5px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    margin-left: 65%; /* Change margin-left to margin-right */
+    margin-top: 5px;
+}
+
+.dropdown label,
+.dropdown select {
+    font-family: "Poppins";
+    display: block;
+    margin-bottom: 5x;
+}
+
+/* Style the select element to look like a dropdown */
+.dropdown select {
+    font-family: "Poppins";
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 5px 10px;
+    border: 1px solid rgb(59, 112, 116);
+    border-radius: 4px;
+    background-color: white;
+    width: 100%;
+}
+
+/* Style the label to look like a dropdown label */
+.dropdown label {
+    font-family: "Poppins";
+    font-weight: bold;
+}
+
+/* search bar */
+.search-container {
+    font-family: "Poppins";
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 33.33%;
+    margin-left: 65%;
+    margin-top: 1%;
+}
+
+#search {
+    font-family: "Poppins";
+    padding: 10px;
+    border: 2px solid #3a748b; 
+    border-radius: 30px; 
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+#search-icon {
+    font-family: "Poppins";
+    cursor: pointer;
+    margin-left: 10px;
+}
+
