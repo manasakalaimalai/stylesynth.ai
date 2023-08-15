@@ -15,3 +15,7 @@ function populateSearchBar(optionId) {
         searchInput.value = currentSearchValue + ', ' + selectedOption.value;
     }
 }
+
+function redirectToProduct(link) {
+    window.open(link, '_blank');
+}

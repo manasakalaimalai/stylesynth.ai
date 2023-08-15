@@ -124,9 +124,9 @@
     <div class="results-container">
         {% for result in search_results %}
             <div class="result">
-                <h3>{{ result['title'] }}</h3>
+                <h3 class="result-title">{{ result['title'] }}</h3>
                 <img src="{{ result['thumbnail'] }}" alt="Result Image">
-                <p>Click here to redirect to product page: <a href="{{ result['link'] }}" target="_blank">{{ result['source'] }}</a></p>
+                <a href="{{ result['link'] }}" target="_blank" class="order-button">Order</a>
             </div>
         {% endfor %}
     </div>

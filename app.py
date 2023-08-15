@@ -36,7 +36,7 @@ def submit():
     search = GoogleSearch(params)
     results = search.get_dict()
 
-    image_results = results["images_results"][:5]
+    image_results = results["images_results"][:10]
 
 
     # Process the selected options as needed

@@ -109,3 +109,47 @@
     margin-left: 10px;
 }
 
+
+
+/* search results  */
+.results-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.result {
+    width: 18%; /* Adjust width as needed */
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: relative;
+}
+
+.result img {
+    max-width: 100%;
+    height: auto;
+}
+
+.order-button {
+    font-family: "Poppins";
+    font-size: small;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background-color: #488294;
+    color: #fff;
+    border:#fff;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.result-title {
+    font-family: "Poppins";
+    text-align: center;
+    font-size:medium; /* Adjust font size as needed */
+    font-weight:lighter;
+    margin-bottom: 10px;
+}
