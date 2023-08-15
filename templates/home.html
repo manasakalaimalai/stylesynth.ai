@@ -120,6 +120,17 @@
     </form>
     <div id="selected-options" class="tag-container"></div>
 
+    <h2>Search Results</h2>
+    <div class="results-container">
+        {% for result in search_results %}
+            <div class="result">
+                <h3>{{ result['title'] }}</h3>
+                <img src="{{ result['thumbnail'] }}" alt="Result Image">
+                <p>Click here to redirect to product page: <a href="{{ result['link'] }}" target="_blank">{{ result['source'] }}</a></p>
+            </div>
+        {% endfor %}
+    </div>
+
 </body>
 </html>
 
