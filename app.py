@@ -52,5 +52,48 @@ def submit():
     db.close()
     return render_template('home.html', search_results=image_results)
 
+
+@app.route('/order', methods=['POST'])
+def order_product():
+    title = request.form.get('title')
+    link = request.form.get('link')
+    thumbnail = request.form.get('thumbnail')
+
+    conn = sqlite3.connect('orders.db')
+    cursor = conn.cursor()
+
+    # Create the 'products' table if it doesn't exist
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS products (
+            id INTEGER PRIMARY KEY,
+            title TEXT NOT NULL,
+            link TEXT NOT NULL,
+            thumbnail TEXT NOT NULL
+        )
+    ''')
+
+    cursor.execute('INSERT INTO products (title, link, thumbnail) VALUES (?, ?, ?)',
+                   (title, link, thumbnail))
+    conn.commit()
+
+    return redirect('/orderedthumbsup')
+
+@app.route('/orderedthumbsup')
+def ordered_thumbs_up():
+    return render_template('orderedthumbsup.html')
+
+
+@app.route('/orders')
+def orders():
+    conn = sqlite3.connect('orders.db')
+    cursor = conn.cursor()
+    
+    cursor.execute('SELECT id, title, link, thumbnail FROM products')
+    orders_data = cursor.fetchall()
+    
+    conn.close()
+    
+    return render_template('orders.html', orders=orders_data)
+
 if __name__ == "__main__":
     app.run(debug=True)

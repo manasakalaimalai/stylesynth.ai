@@ -17,7 +17,7 @@
         <nav class="navbar">
             <ul class="nav-list">
                 <li><a href="#">Marketplace</a></li>
-                <li><a href="#">Orders</a></li>
+                <li><a href="{{ url_for('orders') }}">Orders</a></li>
                 <li><a href="../templates/outfit.html">Outfit Tool</a></li>
             </ul>
         </nav>
@@ -125,8 +125,16 @@
         {% for result in search_results %}
             <div class="result">
                 <h3 class="result-title">{{ result['title'] }}</h3>
-                <img src="{{ result['thumbnail'] }}" alt="Result Image">
-                <a href="{{ result['link'] }}" target="_blank" class="order-button">Order</a>
+                <a href="{{ result['link'] }}" target="_blank">
+                    <img src="{{ result['thumbnail'] }}" alt="Result Image">
+                </a>
+                <form action="/order" method="post">
+                    <input type="hidden" name="title" value="{{ result['title'] }}">
+                    <input type="hidden" name="link" value="{{ result['link'] }}">
+                    <input type="hidden" name="thumbnail" value="{{ result['thumbnail'] }}">
+                    <button type="submit" class="order-button">Order</button>
+                </form>            
+
             </div>
         {% endfor %}
     </div>
