@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -98,5 +98,43 @@
 
   askQuestion();
 </script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+   <script src="../static/script.js"></script>
+
+    <title>Chatbot Demo</title>
+    <style>
+        #chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #chat-history {
+            margin-bottom: 20px;
+        }
+        #user-input {
+            width: 100%;
+            padding: 10px;
+        }
+        #response-container {
+            margin-top: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-history"></div>
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button id="submit-btn">Send</button>
+        <div id="response-container"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
