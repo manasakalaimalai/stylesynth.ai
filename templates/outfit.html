@@ -209,6 +209,16 @@
               <br>
               <img src="{{ stable_output }}" alt="Stable Output Image">
             </div>
+            <div class="results-container">
+              {% for result in search_results %}
+                  <div class="result">
+                      <h3 class="result-title">{{ result['title'] }}</h3>
+                      <a href="{{ result['link'] }}" target="_blank">
+                          <img src="{{ result['thumbnail'] }}" alt="Result Image">
+                      </a>          
+                  </div>
+              {% endfor %}
+          </div>
         </div>
     {% endif %}
   </div>

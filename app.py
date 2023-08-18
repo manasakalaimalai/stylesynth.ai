@@ -33,18 +33,35 @@ def chat():
     generated_response = None
     user_input = None
     stable_output = None
+    image_results = None
 
     if request.method == 'POST':
         user_input = request.form['user_input']
         response.append(("User:", user_input))
         generated_response = generate_response("Reply like you're a fashion assistant, I need a concise and straightforward answer, only listing the names of the clothes required. " + user_input)
         stable_prompt = remove_stop_words(generated_response)
+
+        params = {
+        "api_key": "1260231f7bba0c7bfc657de963706e2d1deaade93938c3cd588f22ab7d195ab8",
+        "engine": "google_images",
+        "safe": "active",
+        "q": generated_response,  # Use the filtered query here
+        "google_domain": "google.co.in",
+        "gl": "in",
+        "hl": "en",
+        "location": "Bengaluru, Karnataka, India"
+        }
+
+        search = GoogleSearch(params)
+        results = search.get_dict()
+        image_results = results["images_results"][:2]
         generated_response += "\n" + "Here's an option:\n" 
         stable_output = replicate.run("stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4",input={"prompt": stable_prompt})
         stable_output=stable_output[0]
+
         print(stable_output)
 
-    return render_template('outfit.html', response=response, generated_response=generated_response, user_input=user_input, stable_output=stable_output)
+    return render_template('outfit.html', response=response, generated_response=generated_response, user_input=user_input, stable_output=stable_output, search_results = image_results)
 
 @app.route('/submit', methods=['POST'])
 def submit():
