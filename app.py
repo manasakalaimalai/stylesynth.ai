@@ -1,12 +1,50 @@
 from flask import Flask, render_template, request, redirect, url_for
 from serpapi import GoogleSearch
 import sqlite3
+from gpt4all import GPT4All
+import json
+import nltk
+from nltk.corpus import stopwords
+import replicate
+
+nltk.download('stopwords') 
+
+stop_words = set(stopwords.words('english')) 
+
+
+def remove_stop_words(sentence): 
+    words = sentence.split() 
+  
+    filtered_words = [word for word in words if word not in stop_words] 
+    return ' '.join(filtered_words)
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello():
-    return render_template('outfit.html')
+model = GPT4All("llama-2-7b-chat.ggmlv3.q4_0.bin")
+
+def generate_response(prompt):
+    # Your LLM code here
+    response = model.generate(prompt, max_tokens=150)  # Replace with actual model generation code
+    return response
+
+@app.route('/', methods=['GET', 'POST'])
+def chat():
+    response = []
+    generated_response = None
+    user_input = None
+    stable_output = None
+
+    if request.method == 'POST':
+        user_input = request.form['user_input']
+        response.append(("User:", user_input))
+        generated_response = generate_response("Reply like you're a fashion assistant, I need a concise and straightforward answer, only listing the names of the clothes required. " + user_input)
+        stable_prompt = remove_stop_words(generated_response)
+        generated_response += "\n" + "Here's an option:\n" 
+        stable_output = replicate.run("stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4",input={"prompt": stable_prompt})
+        stable_output=stable_output[0]
+        print(stable_output)
+
+    return render_template('outfit.html', response=response, generated_response=generated_response, user_input=user_input, stable_output=stable_output)
 
 @app.route('/submit', methods=['POST'])
 def submit():

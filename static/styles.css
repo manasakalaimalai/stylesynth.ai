@@ -153,3 +153,21 @@
     font-weight:lighter;
     margin-bottom: 10px;
 }
+
+
+/*  chatbot */
+.chat-message {
+    font-family: "Poppins";
+    color:#3a748b;
+}
+
+/* Customize the font for specific elements */
+.chat-header {
+    font-family: "Poppins";
+    color:blue;
+}
+
+.user-input-form {
+    font-family: "Poppins";
+    color:chocolate;
+}
