@@ -61,11 +61,51 @@ def chat():
 
         print(stable_output)
 
-    return render_template('outfit.html', response=response, generated_response=generated_response, user_input=user_input, stable_output=stable_output, search_results = image_results)
+    return render_template('chatbox.html', response=response, generated_response=generated_response, user_input=user_input, stable_output=stable_output, search_results = image_results)
 
 @app.route('/hola', methods=['GET', 'POST'])
 def hola():
     return render_template('home.html')
+
+@app.route('/chatbox', methods=['GET', 'POST'])
+def chatbox():
+
+    if request.method == 'POST':
+        answers_json = request.form.get('answers[]')
+        answers = json.loads(answers_json)
+        suggested_response = None
+        first_stable_output = None
+
+        for idx, answer in enumerate(answers):
+            print(f"Answer {idx + 1}: {answer}")
+
+        db = sqlite3.connect('search_history.db')
+        cursor = db.cursor()
+        cursor.execute("SELECT name FROM sqlite_master WHERE type = 'table' AND name=?", ('history',))
+        cursor.execute("SELECT GARMENT FROM HISTORY GROUP BY GARMENT ORDER BY COUNT(*) DESC LIMIT 1")
+        gar = cursor.fetchone()[0]
+        cursor.execute("SELECT BRAND FROM HISTORY GROUP BY BRAND ORDER BY COUNT(*) DESC LIMIT 1")
+        brnd = cursor.fetchone()[0]
+        cursor.execute("SELECT FABRIC FROM HISTORY GROUP BY FABRIC ORDER BY COUNT(*) DESC LIMIT 1")
+        fab = cursor.fetchone()[0]
+        cursor.execute("SELECT COLOR FROM HISTORY GROUP BY COLOR ORDER BY COUNT(*) DESC LIMIT 1")
+        col = cursor.fetchone()[0]
+        gar = gar.replace("Any", "")
+        brnd = brnd.replace("Any", "")
+        fab = fab.replace("Any", "")
+        col = col.replace("Any", "")
+
+        print(gar, brnd, fab, col)
+        prompt = "A " + col + " " + fab +" " + brnd + " " + gar + " for a " + answers[1] + " year old, " + "living in " + answers[3]+ " with a " + answers[0] + " body type " + " on the occasion of " + answers[2]
+        print(prompt)
+        first_stable_output = replicate.run("stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4",input={"prompt": prompt})
+        first_stable_output=first_stable_output[0]
+
+        print(first_stable_output)
+        return render_template('chatbox.html', first_stable_output= first_stable_output)
+    else:
+        return render_template('outfit.html')
+
 
 @app.route('/', methods=['GET', 'POST'])
 def submit():

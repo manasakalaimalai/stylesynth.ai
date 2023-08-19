@@ -89,6 +89,15 @@
             </div>
         {% endfor %}
     </div>
+    {% if first_stable_output %}
+        <div class="chat-box" id="suggested_response">
+            <div class="chat-message chatbot-message">
+              <br>
+              <h3>Here's a pic of what we think would suit you based on your search results, order history and answers!</h3>
+              <img src="{{ first_stable_output }}" alt="Stable Output Image">
+            </div>
+        </div>
+    {% endif %}
     <form action="/chat" class="user-input-form" method="POST">
       <input type="text" name="user_input" id="user-input" placeholder="Type your message here..."">
       <button type="submit" id="send-button" style="margin-left: 20px;">generate</button>
@@ -118,4 +127,5 @@
     {% endif %}
   </div>
 </body>
+
 </html>

@@ -55,6 +55,10 @@
   <div id="chat"></div>
   <div id="inputSection"></div>
   <div id="output"></div>
+  <form id="userAnswersForm" action="/chatbox" method="POST" style="display: none;">
+    <!-- Form input fields will be dynamically added here -->
+    <button type="submit">Submit Answers</button>
+  </form>
 </div>
 <script>
   const questions = [
@@ -68,33 +72,37 @@
   const chatElement = document.getElementById("chat");
   const inputSection = document.getElementById("inputSection");
   const outputElement = document.getElementById("output");
+  const userAnswers = [];
 
   function askQuestion() {
-    if (currentQuestion < questions.length) {
-      chatElement.innerHTML = `<p><strong>Bot:</strong> ${questions[currentQuestion]}</p>`;
-      inputSection.innerHTML = `<input type="text" id="answer${currentQuestion}" placeholder="Your answer...">`;
-      inputSection.innerHTML += `<button onclick="nextQuestion()">Next</button>`;
-    } else {
-        inputSection.innerHTML = `<p>Loading...</p>`;
-        setTimeout(showOutput, 200); // Simulate loading time and call showOutput after 2 seconds
-    }
+  if (currentQuestion < questions.length) {
+    chatElement.innerHTML = `<p><strong>Bot:</strong> ${questions[currentQuestion]}</p>`;
+    inputSection.innerHTML = `<input type="text" id="answer${currentQuestion}" name="answers[]" placeholder="Your answer...">`;
+    inputSection.innerHTML += `<button onclick="nextQuestion()">Next</button>`;
+  } else {
+    inputSection.innerHTML = `<p>Loading...</p>`;
+    const form = document.getElementById("userAnswersForm");
+    form.style.display = "block"; // Display the form
+    submitForm(); // Call the submitForm() function to send the answers
   }
+}
 
-  function nextQuestion() {
-    const answer = document.getElementById(`answer${currentQuestion}`).value;
-    // Do something with the user's answer if needed
-    currentQuestion++;
-    askQuestion();
-  }
-
-  function showOutput() {
-    let outputText = "User's Answers:\n";
-    for (let i = 0; i < questions.length; i++) {
-      const answer = document.getElementById(`answer${i}`).value;
-      outputText += `${questions[i]}\n${answer}\n\n`;
-    }
-    outputElement.innerHTML = `<pre>${outputText}</pre>`;
-  }
+function nextQuestion() {
+  const answer = document.getElementById(`answer${currentQuestion}`).value;
+  userAnswers[currentQuestion] = answer;
+  console.log(`Answer ${currentQuestion + 1}: ${answer}`);
+  currentQuestion++;
+  askQuestion();
+}
+function submitForm() {
+  const form = document.getElementById("userAnswersForm");
+  const answersInput = document.createElement("input");
+  answersInput.type = "hidden";
+  answersInput.name = "answers[]";
+  answersInput.value = JSON.stringify(userAnswers);
+  form.appendChild(answersInput);
+  form.submit();
+}
 
   askQuestion();
 </script>
