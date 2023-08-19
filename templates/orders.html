@@ -11,14 +11,14 @@
 
 <body>
     <header class="header">
-        <a href="#">
+        <a href="{{ url_for('hola') }}"">
             <img src="../static/images/title.png" alt="Website Logo" class="logo">
         </a>
         <nav class="navbar">
             <ul class="nav-list">
-                <li><a href="#">Marketplace</a></li>
-                <li><a href="../templates/orders.html">Orders</a></li>
-                <li><a href="../templates/outfit.html">Outfit Tool</a></li>
+                <li><a href="{{ url_for('hola') }}">Marketplace</a></li>
+                <li><a href="{{ url_for('orders') }}">Orders</a></li>
+                <li><a href="{{ url_for('chat') }}">Outfit Tool</a></li>
             </ul>
         </nav>
     </header>

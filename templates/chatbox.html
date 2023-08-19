@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <script src="../static/script.js"></script>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+   
+    <title>Chatbot Demo</title>
+    <style>
+        #chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 200px;
+        }
+        #chat-history {
+            margin-bottom: 20px;
+        }
+        #user-input {
+            width: 100%;
+            padding: 10px;
+        }
+        #response-container {
+            margin-top: 10px;
+            font-family: monospace;
+        }
+
+        .chat-message {
+            font-family: "Poppins";
+            color:#3a748b;
+        }
+        .chat-header {
+            font-family: "Poppins";
+            color:blue;
+        }
+        .user-input-form {
+            font-family: "Poppins";
+            color:chocolate;
+        }
+
+        /* Center-align chat messages and user input box */
+        .chat-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* Customize the size of the prompt box */
+        #user-input {
+          font-family: "Poppins";
+          border-color: #ffffff;
+          border-radius: 10%;
+          background-color: #e1e3ce;
+          fill-opacity: 0.2;
+          color:rgb(0, 0, 0);
+          width: 800px; /* Adjust the width as needed */
+          font-size: 14px; /* Adjust the font size as needed */
+          padding: 8px;
+          /* border-width: 5px; */
+          box-shadow: 10px 10px 5px lightblue;
+          padding: 10px 100px; /* Adjust the padding as needed */
+
+        }
+        /* Customize the size of the send button */
+        #send-button {
+          background-color: #7bafc4;
+          box-shadow: 8px 8px 5px rgb(185, 227, 245);
+          font-weight: 800;
+          letter-spacing: 2px;
+          border-radius: 20%;
+          border-width: 5px;
+          border-color: #aaddf3;
+          color: rgb(255, 255, 255);
+          font-family: "Poppins";
+          font-size: 14px; /* Adjust the font size as needed */
+          padding: 10px 100px; /* Adjust the padding as needed */
+        }
+    </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-box" id="chat-box">
+        {% for message in response %}
+            <div class="chat-message">
+                {{ message[0] }} {{ message[1] }}
+            </div>
+        {% endfor %}
+    </div>
+    <form action="/chat" class="user-input-form" method="POST">
+      <input type="text" name="user_input" id="user-input" placeholder="Type your message here..."">
+      <button type="submit" id="send-button" style="margin-left: 20px;">generate</button>
+    </form>
+    {% if user_input %}
+        <div class="chat-box" id="user-prompt-box">
+            <div class="chat-message user-message">User: {{ user_input }}</div>
+        </div>
+    {% endif %}
+    {% if generated_response %}
+        <div class="chat-box" id="generated-response-box">
+            <div class="chat-message chatbot-message">ChatBot: {{ generated_response }}
+              <br>
+              <img src="{{ stable_output }}" alt="Stable Output Image">
+            </div>
+            <div class="results-container">
+              {% for result in search_results %}
+                  <div class="result">
+                      <h3 class="result-title">{{ result['title'] }}</h3>
+                      <a href="{{ result['link'] }}" target="_blank">
+                          <img src="{{ result['thumbnail'] }}" alt="Result Image">
+                      </a>          
+                  </div>
+              {% endfor %}
+          </div>
+        </div>
+    {% endif %}
+  </div>
+</body>
+</html>
