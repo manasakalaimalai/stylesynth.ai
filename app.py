@@ -25,7 +25,7 @@ model = GPT4All("llama-2-7b-chat.ggmlv3.q4_0.bin")
 
 def generate_response(prompt):
     # Your LLM code here
-    response = model.generate(prompt, max_tokens=20)  # Replace with actual model generation code
+    response = model.generate(prompt, max_tokens=120)  # Replace with actual model generation code
     return response
 
 @app.route('/chat', methods=['GET', 'POST'])
@@ -40,10 +40,10 @@ def chat():
         user_input = request.form['user_input']
         response.append(("User:", user_input))
         generated_response = generate_response("Reply like you're a fashion assistant, I need a concise and straightforward answer, only listing the names of the clothes required. " + user_input)
+        google_images = colour + generated_response + " \"clothes\""
         print(generated_response)
         stable_prompt = remove_stop_words(generated_response)
-        google_images = generate_response(user_input + " your reply should only have the list of clothes required.")
-        google_images = "\"" + colour + "\" " + google_images
+        
         print("Google image prompt:",google_images)
 
         params = {
@@ -56,7 +56,7 @@ def chat():
         "hl": "en",
         "location": "Bengaluru, Karnataka, India"
         }
-
+        stable_prompt += "full outfit, high detail"
         search = GoogleSearch(params)
         results = search.get_dict()
         image_results = results["shopping_results"][:2]
