@@ -6,21 +6,79 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Serif+Display:wght@500&display=swap" rel="stylesheet">
     <script src="../static/script.js"></script>
+    <style>
+        
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px;
+            margin-right: 10%;
+        }
+
+        .text-column {
+            flex: 1;
+            padding: 20px;
+            color: white;
+            font-family: 'Noto Serif Display';
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .text1-column {
+            width: 60%;
+            margin-left: 90%; 
+            margin-bottom: 30%;
+            color: white;
+            font-family: 'Noto Serif Display';
+            font-size: 12px;
+            text-align: right;
+        }
+
+        .text2-column {
+            width: 60%;
+            margin-right: -80%;
+            color: white;
+            font-family: 'Noto Serif Display';
+            font-size: 12px;
+        }
+
+        .container-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            animation: fadeInAnimation ease 2s;
+            animation: iteration count 1px;
+            animation-fill-mode: forwards;
+        }
+
+        .container-image img {
+            width: 120%;
+            display: block;
+        }
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <header class="header">
         <a href="{{ url_for('hola') }}">
-            <img src="../static/images/title.png" alt="Website Logo" class="logo" }}">
+            <img src="../static/images/logo.png" alt="Website Logo" class="logo" }}">
         </a>
-        <nav class="navbar">
-            <ul class="nav-list">
-                <li><a href="{{ url_for('hola') }}">Marketplace</a></li>
-                <li><a href="{{ url_for('orders') }}">Orders</a></li>
-                <li><a href="{{ url_for('chatbox') }}">Outfit Tool</a></li>
-            </ul>
-        </nav>
+        
     </header>
     <form action="/" method="POST">
         <div class="search-container">
@@ -118,12 +176,49 @@
             <br><br>
         </div>
     </form>
-    <div id="selected-options" class="tag-container"></div>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li><a href="{{ url_for('hola') }}">Marketplace</a></li>
+            <li><a href="{{ url_for('orders') }}">Orders</a></li>
+            <li><a href="{{ url_for('chatbox') }}">Outfit Tool</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="column">
+            <!-- Left-side text -->
+            <div class="text1-column" style="margin-top: 30%; padding-bottom: 90px;">
+                <h2>Personalized Fashion Outfit Generator</h2>
+                <p>Get AI-generated outfit recommendations. All you have to do is shop!</p>
+            </div>
+            <div class="text1-column" >
+                <h2>Wear Today's Trending Outfits</h2>
+                <p>StyleSynth.ai's algorithm considers current trends to create the most stylish outfits for you</p>
+            </div>
+        </div>
+        
+        <div class="column">
+            <!-- Image -->
+            <div class="container-image">
+                <img src="../static/images/male.jpeg" alt="Hot Male Model" class="hot_male">
+            </div>
+        </div>
+        
+        <div class="column">
+            <!-- Right-side text -->
+            <div class="text2-column">
+                <h2>Personal Fashion Assistant</h2>
+                <p>Converse with our AI assistant and receive with suitable, relevant, and personalized designs</p>
+            </div>
+        </div>
+    </div>
+    
 
+    <div id="selected-options" class="tag-container"></div>
+    <h1 style="font-family: 'Poppins'; text-align: center; font-size: 30px; color: white; letter-spacing: 1px; padding-bottom: 20px;">Search Results</h1>
     <div class="results-container">
         {% for result in search_results %}
             <div class="result">
-                <h3 class="result-title">{{ result['title'] }}</h3>
+                <h3 class="result-title" style="font-family: 'Noto Serif Display'; color: white; font-size: 12px;">{{ result['title'] }}</h3>
                 <a href="{{ result['link'] }}" target="_blank">
                     <img src="{{ result['thumbnail'] }}" alt="Result Image">
                 </a>
@@ -140,5 +235,3 @@
 
 </body>
 </html>
-
-

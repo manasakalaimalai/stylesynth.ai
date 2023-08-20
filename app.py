@@ -11,6 +11,7 @@ nltk.download('stopwords')
 
 stop_words = set(stopwords.words('english')) 
 
+# colour = None
 
 def remove_stop_words(sentence): 
     words = sentence.split() 
@@ -24,7 +25,7 @@ model = GPT4All("llama-2-7b-chat.ggmlv3.q4_0.bin")
 
 def generate_response(prompt):
     # Your LLM code here
-    response = model.generate(prompt, max_tokens=150)  # Replace with actual model generation code
+    response = model.generate(prompt, max_tokens=20)  # Replace with actual model generation code
     return response
 
 @app.route('/chat', methods=['GET', 'POST'])
@@ -39,13 +40,17 @@ def chat():
         user_input = request.form['user_input']
         response.append(("User:", user_input))
         generated_response = generate_response("Reply like you're a fashion assistant, I need a concise and straightforward answer, only listing the names of the clothes required. " + user_input)
+        print(generated_response)
         stable_prompt = remove_stop_words(generated_response)
+        google_images = generate_response(user_input + " your reply should only have the list of clothes required.")
+        google_images = "\"" + colour + "\" " + google_images
+        print("Google image prompt:",google_images)
 
         params = {
         "api_key": "1260231f7bba0c7bfc657de963706e2d1deaade93938c3cd588f22ab7d195ab8",
-        "engine": "google_images",
+        "engine": "google_shopping",
         "safe": "active",
-        "q": generated_response,  # Use the filtered query here
+        "q": google_images,  # Use the filtered query here
         "google_domain": "google.co.in",
         "gl": "in",
         "hl": "en",
@@ -54,7 +59,7 @@ def chat():
 
         search = GoogleSearch(params)
         results = search.get_dict()
-        image_results = results["images_results"][:2]
+        image_results = results["shopping_results"][:2]
         generated_response += "\n" + "Here's an option:\n" 
         stable_output = replicate.run("stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4",input={"prompt": stable_prompt})
         stable_output=stable_output[0]
@@ -94,6 +99,9 @@ def chatbox():
         brnd = brnd.replace("Any", "")
         fab = fab.replace("Any", "")
         col = col.replace("Any", "")
+
+        global colour 
+        colour = col
 
         print(gar, brnd, fab, col)
         prompt = "A " + col + " " + fab +" " + brnd + " " + gar + " for a " + answers[1] + " year old, " + "living in " + answers[3]+ " with a " + answers[0] + " body type " + " on the occasion of " + answers[2]
@@ -153,7 +161,6 @@ def submit():
         db.close()
     return render_template('home.html', search_results=image_results)
 
-
 @app.route('/order', methods=['POST'])
 def order_product():
     title = request.form.get('title')
@@ -177,7 +184,7 @@ def order_product():
                    (title, link, thumbnail))
     conn.commit()
 
-    return redirect('/orderedthumbsup')
+    return redirect('/orders')
 
 @app.route('/orderedthumbsup')
 def ordered_thumbs_up():

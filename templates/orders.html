@@ -6,15 +6,73 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Serif+Display:wght@500&display=swap" rel="stylesheet">
     <script src="../static/script.js"></script>
+    <style>
+        .results-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100vw;
+            opacity: 0; 
+            transform: translateY(60%);
+            animation: orderIn 2s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        @keyframes orderIn {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-container.loaded {
+            opacity: 1;
+        }
+
+        .result {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 10px;
+            background-color: rgb(169, 172, 174);
+            border: 1px solid rgb(67, 69, 71);
+            color: rgb(43, 73, 87);
+            margin: 10px 0;
+        }
+
+        .result a {
+            flex: 0.25;
+            text-decoration: none;
+        }
+
+        .result img {
+            width: 50%;
+            height: auto;
+        }
+
+        .result h3 {
+            font-family: 'Noto Serif Display';
+            font-size: 18px;
+            letter-spacing: 1px;
+            flex: 1;
+            margin-left: 10px;
+        }
+    </style>
 </head>
 
 <body>
     <header class="header">
-        <a href="{{ url_for('hola') }}"">
-            <img src="../static/images/title.png" alt="Website Logo" class="logo">
+        <a href="{{ url_for('hola') }}">
+            <img src="../static/images/logo.png" alt="Website Logo" class="logo" }}">
         </a>
-        <nav class="navbar">
+        <nav class="navbar" style="margin-top: 50px;">
             <ul class="nav-list">
                 <li><a href="{{ url_for('hola') }}">Marketplace</a></li>
                 <li><a href="{{ url_for('orders') }}">Orders</a></li>
@@ -23,18 +81,20 @@
         </nav>
     </header>
 
-    <h1>Orders</h1>
+    <h1 style="font-family: 'Poppins'; text-align: center; margin-top: 50px; font-size: 25px; color: white; letter-spacing: 1px; padding-bottom: 20px; padding-left: 30px;">Your Orders</h1>
     
-    <div class="results-container">
+    <div class="results-container" style="display: flex; flex-direction: column; align-items: center; width: 100vw;">
         {% for order in orders %}
-            <div class="result">
-                <h3 class="result-title">{{ order[1] }}</h3>
-                <a href="{{ order[2] }}" target="_blank">
-                    <img src="{{ order[3] }}" alt="Product Thumbnail">
+            <div class="result" style="display: flex; flex-direction: row; align-items: center; width: 70%; padding: 1px; background-color: rgb(172, 174, 175); border-color: rgb(67, 69, 71); color:rgb(63, 97, 112);   box-shadow: rgba(92, 140, 186, 0.3) 5px 5px 10px, rgba(95, 157, 189, 0.22) 5px 5px 10px;">
+                <a href="{{ order[2] }}" target="_blank" style="flex: 0.25;">
+                    <img src="{{ order[3] }}" alt="Product Thumbnail" style="width: 50%; height: auto;">
                 </a>
+
+                <h3 style="font-family: 'Noto Serif Display'; font-size: 18px; letter-spacing: 1px; flex: 1;">{{ order[1] }}</h3>
             </div>
         {% endfor %}
     </div>
+    
 
 </body>
 </html>

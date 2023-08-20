@@ -21,49 +21,28 @@ function redirectToProduct(link) {
 }
 
 
-// const chatHistory = document.getElementById('chat-history');
-// const userInput = document.getElementById('user-input');
-// const submitBtn = document.getElementById('submit-btn');
-// const responseContainer = document.getElementById('response-container');
+window.addEventListener('DOMContentLoaded', function() {
+    const resultsContainer = document.querySelector('.results-container');
+    resultsContainer.classList.add('loaded');
+});
 
-// const model = new GPT4All("orca-mini-3b.ggmlv3.q4_0.bin");
 
-// submitBtn.addEventListener('click', async () => {
-//     const userMessage = userInput.value;
-    
-//     if (userMessage.trim() === '') {
-//         return;
-//     }
+    const textColumns = document.querySelectorAll('.text1-column, .text2-column');
 
-//     addMessage('user', userMessage);
-//     const response = await generateResponse(userMessage);
-//     addMessage('bot', response, true);
-    
-//     userInput.value = '';
-// });
+    const options = {
+        rootMargin: '0px',
+        threshold: 0.3 // Adjust as needed
+    };
 
-// async function generateResponse(prompt) {
-//     const output = await model.generate(prompt, { max_tokens: 50 });
-//     return output.choices[0].text;
-// }
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeInAnimation ease 1s forwards';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, options);
 
-// function addMessage(role, content, typingEffect = false) {
-//     const messageElement = document.createElement('p');
-//     messageElement.innerHTML = `<strong>${role}:</strong> `;
-//     chatHistory.appendChild(messageElement);
-
-//     if (typingEffect) {
-//         const typingEffectInterval = 50; // milliseconds
-//         let currentIndex = 0;
-//         const typeMessage = () => {
-//             if (currentIndex < content.length) {
-//                 messageElement.innerHTML += content.charAt(currentIndex);
-//                 currentIndex++;
-//                 setTimeout(typeMessage, typingEffectInterval);
-//             }
-//         };
-//         typeMessage();
-//     } else {
-//         messageElement.innerHTML += content;
-//     }
-// }
+    textColumns.forEach(column => {
+        observer.observe(column);
+    });

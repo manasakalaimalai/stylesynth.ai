@@ -1,39 +1,71 @@
 /* New CSS styles for header and nav bar */
+body {
+    background-color: rgb(0, 0, 0);
+}
+
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     /* background-color: #f2f2f2; */
-    padding: 10px;
+    /* padding: 10px; */
+    text-align: center;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
 }
 
 .logo {
-    width: 300px;
+    width: 200px;
+    margin-left: 50px;
+    display: block;
+    margin: 0 auto;
+}
+.navbar {
+    background-color: rgb(47, 83, 98);
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 480px;
+    display: flex;
+    width: 450px;
+    align-items: center;
+    justify-content: center;
+    margin-top: -20px;
+    margin-bottom: 20px;
 }
 
 .nav-list {
-    font-family: "Poppins";
-    font-weight: 600;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    list-style-type: none;
     display: flex;
+    padding: 0;
+    font-family: 'Noto Serif Display', serif;
+    font-weight: 600;
+    margin: 0;
     align-items: center;
 }
 
 .nav-list li {
-    margin-left: 20px;
+    margin-left: 50px;
     margin-right: 50px;
+    margin: 0 20px;
 }
 
 .nav-list li:first-child {
-    margin-left: 10;
+    margin-left: 40;
 }
 
 .nav-list a {
-    color: rgb(46, 110, 126);
+    color: rgb(255, 255, 255);
     text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
+
+/* Add new style for active navigation item */
+.nav-list .nav-item.active a {
+    color: orange; /* Change this to the desired active color */
+    font-weight: bold;
+}
+
 
 
 /* dropdown search bar */
@@ -41,33 +73,33 @@
     font-family: "Poppins";
     display: none;
     position: absolute;
-    background-color: white;
-    border: 1px solid rgb(63, 123, 131);
+    background-color: rgb(171, 171, 171);
+    border: 1px solid rgb(80, 79, 79);
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 30px;
     box-shadow: 5px 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 5;
     margin-left: 65%; /* Change margin-left to margin-right */
-    margin-top: 5px;
+    margin-top: -90px;
 }
 
 .dropdown label,
 .dropdown select {
-    font-family: "Poppins";
+    font-family: 'Noto Serif Display', serif;
     display: block;
     margin-bottom: 5x;
 }
 
 /* Style the select element to look like a dropdown */
 .dropdown select {
-    font-family: "Poppins";
+    font-family: 'Noto Serif Display', serif;
 
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     padding: 5px 10px;
-    border: 1px solid rgb(59, 112, 116);
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 4px;
     background-color: white;
     width: 100%;
@@ -75,25 +107,27 @@
 
 /* Style the label to look like a dropdown label */
 .dropdown label {
-    font-family: "Poppins";
+    font-family: 'Noto Serif Display', serif;
     font-weight: bold;
 }
 
 /* search bar */
 .search-container {
-    font-family: "Poppins";
+    font-family: 'Noto Serif Display', serif;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 33.33%;
     margin-left: 65%;
-    margin-top: 1%;
+    margin-top: -90px;
+    margin-bottom: 100px;
+
 }
 
 #search {
-    font-family: "Poppins";
+    font-family: 'Noto Serif Display', serif;
     padding: 10px;
-    border: 2px solid #3a748b; 
+    border: 2px solid #ffffff; 
     border-radius: 30px; 
     width: 100%; 
     box-sizing: border-box; 
@@ -120,38 +154,46 @@
 
 .result {
     width: 18%; /* Adjust width as needed */
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    padding: 10px;
+    margin-bottom: 40px;
+    border: 1px solid #565656;
+    border-width: 3px;
+    padding-bottom: 50px;
     position: relative;
 }
 
 .result img {
     max-width: 100%;
     height: auto;
+    margin-left: 10%;
+    padding-top: 20px;
+    margin-bottom: 20px;
 }
 
 .order-button {
-    font-family: "Poppins";
+    font-family: "Noto Serif Display";
     font-size: small;
     position: absolute;
     bottom: 10px;
+    align-items: center;
     left: 50%;
     transform: translateX(-50%);
-    padding: 5px 10px;
-    background-color: #488294;
-    color: #fff;
+    padding: 5px 30px;
+    background-color: #ffffff;
+    color: #343333;
     border:#fff;
     border-radius: 50px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .result-title {
-    font-family: "Poppins";
     text-align: center;
     font-size:medium; /* Adjust font size as needed */
     font-weight:lighter;
     margin-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
 }
 
 
@@ -170,4 +212,58 @@
 .user-input-form {
     font-family: "Poppins";
     color:chocolate;
+}
+
+/* 
+font-family: 'Noto Serif Display', serif;
+font-family: 'Archivo Black', sans-serif; */
+
+.container {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    /* background-color: #f2f2f2; */
+}
+
+.container-text {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.container-image {
+    flex: 1;
+    text-align: right;
+    /* margin-right: 20%; */
+}
+
+.container-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.hot_male {
+    width: 100%;
+    margin-left: 25%;
+}
+
+
+
+.text1-column,
+.text2-column {
+    opacity: 0;
+    transform: translateY(100%);
+    animation: fadeIn 2s;
+    animation-fill-mode: forwards; 
+
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
