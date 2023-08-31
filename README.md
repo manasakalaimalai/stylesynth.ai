@@ -7,7 +7,7 @@
 
 Welcome to **StyleSynth.ai**, your own AI fashion assistant. 
 
-![demo](https://github-production-user-asset-6210df.s3.amazonaws.com/53469845/264607651-7dd7ccad-4de5-4805-b17b-eb55c0d99077.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230831%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230831T181358Z&X-Amz-Expires=300&X-Amz-Signature=792086e765fad4d6499d52d511d6c43a6fa810bce07f8b986b2eef29a726a0c7&X-Amz-SignedHeaders=host&actor_id=58686893&key_id=0&repo_id=676853891)
+![demo](https://github.com/manasakalaimalai/stylesynth.ai/assets/53469845/7dd7ccad-4de5-4805-b17b-eb55c0d99077)
 
 # Description
 **StyleSynth.ai** is an online fashion tool that incorporates Generative AI to provide personalized outfit recommendations to users. Our model makes use of a combination of prompt and image generation to create a smooth user experience. We integrated the LLaMa-based chatbot by GPT4ALL as well as the Stable Diffusion API from HuggingFace to create our tool. 
