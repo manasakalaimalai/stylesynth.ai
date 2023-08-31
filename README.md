@@ -5,7 +5,7 @@
 &nbsp;
 &nbsp;
 
-Welcome to StyleSynth.ai, your own AI fashion assistant. 
+Welcome to **StyleSynth.ai**, your own AI fashion assistant. 
 
 ![demo](https://github.com/manasakalaimalai/stylesynth.ai/assets/53469845/7dd7ccad-4de5-4805-b17b-eb55c0d99077)
 
