@@ -15,8 +15,9 @@ Welcome to **StyleSynth.ai**, your own AI fashion assistant.
 &nbsp;
 &nbsp;
 
-<img width="1103" alt="Screenshot 2023-08-31 at 11 09 23 AM" src="https://github.com/manasakalaimalai/stylesynth.ai/assets/53469845/97e5fbe6-242a-4cbf-aff9-94c87366bbe9>
-https://user-images.githubusercontent.com/53469845/185990191-786753bb-f077-4827-8bca-2d680feafa49.pngc
+
+<img width="1103" alt="Screenshot 2023-08-31 at 11 09 23 AM" src="https://github.com/manasakalaimalai/stylesynth.ai/assets/53469845/366a0c8c-00b5-44e5-8060-7ad40addbcf7">
+
 
 # Features
 * **Conversational Interface:** Chatbot-like system that understands user inputs, preferences, and feedback
